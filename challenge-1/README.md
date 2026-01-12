@@ -22,9 +22,9 @@ Your challenge includes comprehensive insurance data across three categories:
 
 | Data Category | Files | Purpose |
 |---------------|-------|---------|
-| **Claims Data** (`data/claims/`) | `crash1.jpg`, `crash2.jpg`, `crash3.jpg`, `crash4.jpeg`, `crash5.jpg`, `invoice.png` | Vehicle accident documentation and repair invoices for OCR processing |
+| **Claims Data** (`data/images/`) | `crash1.jpg`, `crash2.jpg`, `crash3.jpg`, `crash4.jpg`, `crash5.jpg` | Vehicle accident documentation for OCR processing |
 | **Policy Data** (`data/policies/`) | `commercial_auto_policy.md`, `comprehensive_auto_policy.md`, `high_value_vehicle_policy.md`, `liability_only_policy.md`, `motorcycle_policy.md` | Insurance policy documents for text processing and policy validation |
-| **Claim Statements** (`data/statements/`) | `crash1.md` through `crash5.md` | Written statements corresponding to each claim for comprehensive analysis |
+| **Claim Statements** (`data/statements/`) | `crash1_front.jpeg`, `crash1_back.jpeg`, `crash2_front.jpeg`, `crash2_back.jpeg`, `crash3_front.jpeg`, `crash3_back.jpeg`, `crash4_front.jpeg`, `crash4_back.jpeg`, `crash5_front.jpeg`, `crash5_back.jpeg` | Written statements (front and back) corresponding to each claim for comprehensive analysis |
 
 
 ## Document Processing after the Generative AI Wave

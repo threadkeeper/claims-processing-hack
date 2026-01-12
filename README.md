@@ -6,23 +6,19 @@ Today, you'll dive into the world of intelligent agent systems powered by Azure 
 
 ## Introduction
 
-Get ready to transform insurance claims processing with AI using cutting-edge technologies from Azure AI! In this hackathon, you'll master multimodal document processing, vectorized search, and intelligent agent orchestration to build a production-ready claims processing system that understands policy documents, analyzes damage photos, and validates claims—just like experienced insurance adjusters, but faster and more consistent.
-
-Using GPT-4.1-mini's multimodal capabilities, Azure AI Search with integrated vectorization, and the Microsoft Agent Framework, you'll create a sophisticated document processing pipeline that handles text, images, and handwritten statements seamlessly. From environment setup through document processing to intelligent agent creation, you'll build a complete system that automates complex insurance workflows while maintaining transparency and accuracy.
+Transform insurance claims processing into an AI-native, enterprise-ready system using Microsoft Foundry and the Model Context Protocol. This hackathon uniquely combines three cutting-edge approaches: **compare multiple AI document processing techniques** (GPT-4.1-mini vision, Mistral Document AI, and Azure Document Intelligence) to learn when to use each based on cost and accuracy; **build with the next-generation Microsoft Foundry platform** (ai.azure.com) featuring integrated vectorization, continuous evaluation, and OpenTelemetry tracing for the complete GenAIOps lifecycle; and **deploy as an MCP server** through Azure API Management, making your multi-agent workflow accessible to GitHub Copilot, Claude Desktop, and other AI assistants. From vectorized search foundations through intelligent agent orchestration to AI-native deployment, you'll master the full stack of enterprise AI development—building systems that are observable, scalable, secure, and seamlessly integrated with the broader AI ecosystem.
 
 ## Learning Objectives 🎯
 
 By participating in this hackathon, you will learn how to:
 
-- **Process Multimodal Documents** using GPT-4.1-mini to extract and understand information from text documents, images, and handwritten statements with advanced OCR and vision capabilities.
-- **Build Vectorized Search Systems** with Azure AI Search's integrated vectorization to enable semantic search across insurance policies, claims, and statements using hybrid search (keyword + vector + semantic).
-- **Create Intelligent AI Agents** using Microsoft Agent Framework and Microsoft Foundry to orchestrate document processing workflows, make intelligent decisions, and validate claim information.
-- **Implement Function Calling/Tools** to extend agent capabilities with custom tools for OCR, document parsing, policy validation, and claim assessment.
-- **Generate Structured Outputs** from unstructured documents, producing standardized JSON claim reports with validation, confidence scores, and actionable recommendations.
+- **Compare Multiple AI Document Processing Approaches**: Implement and evaluate GPT-4.1-mini, Mistral Document AI, and Azure Document Intelligence—learning when to use each based on document type, cost, and accuracy needs.
+- **Build with Microsoft Foundry Platform**: Master the next-generation [Microsoft Foundry portal](ai.azure.com/nextgen) including agent creation with meta-prompts, integrated vectorization, hybrid search, continuous evaluation, and OpenTelemetry tracing.
+- **Orchestrate Multi-Agent Workflows**: Create intelligent agents using Microsoft Agent Framework that coordinate specialized agents (OCR, JSON structuring, validation), implement function calling, and generate structured outputs.
+- **Implement GenAIOps Best Practices**: Apply the complete AI operations lifecycle—pre-production evaluation, AI red teaming, continuous monitoring, Application Insights integration, and proactive alerting.
+- **Deploy MCP Servers for AI-Native Integration**: Package workflows as Model Context Protocol servers through Azure API Management, enabling GitHub Copilot, Claude Desktop, and other AI assistants to invoke your system as a tool.
 
-## Overview
 
-This hands-on hackathon guides you through building a production-ready, AI-powered insurance claims processing system. You'll learn to leverage cutting-edge generative AI models, multimodal document processing, and intelligent agents to automate complex insurance workflows.
 
 ## Requirements
 To successfully complete this hackathon, you will need the following:
