@@ -1,6 +1,6 @@
 ![Banner](banner.png)
 
-# End-to-End AI Claims Processing with Microsoft Foundry Hackathon
+# Claims Processing with Microsoft Foundry Agents Hackathon
 
 Today, you'll dive into the world of intelligent agent systems powered by Azure AI to revolutionize insurance claims processing. Get ready for a hands-on, high-impact day of learning and innovation!
 
