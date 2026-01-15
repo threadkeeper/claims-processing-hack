@@ -1,6 +1,6 @@
 # Challenge 4: Multi-Agent Workflow and API Deployment
 
-**Expected Duration:** 90 minutes
+**Expected Duration:** 60 minutes
 
 ## Introduction
 

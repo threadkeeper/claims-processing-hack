@@ -1,5 +1,7 @@
 # Challenge 2: Build an AI Agent for Claims Processing
 
+**Expected Duration:** 60 minutes
+
 ## Overview
 In this challenge, you'll create an intelligent AI agent that orchestrates the document processing pipeline you built in Challenge 1. The agent will analyze claim documents, make intelligent decisions about processing, validate claim information, and produce structured outputs.
 
