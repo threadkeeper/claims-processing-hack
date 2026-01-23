@@ -204,6 +204,49 @@ fi
 echo "Skipping Azure AI Search connection query (will construct manually)..."
 azureAIConnectionId=""
 
+# Assign Azure AI Developer role to current user for AI Foundry agent management
+echo ""
+echo "=== Assigning Azure AI Developer role to current user ==="
+echo "This role is required to create and manage AI Foundry agents."
+
+# Get current user's object ID
+currentUserObjectId=$(az ad signed-in-user show --query id -o tsv 2>/dev/null || echo "")
+
+if [ -n "$currentUserObjectId" ] && [ -n "$aiFoundryHubName" ]; then
+    echo "Current user Object ID: $currentUserObjectId"
+    
+    # Get the AI Foundry Hub resource ID
+    aiFoundryResourceId=$(az cognitiveservices account show --name $aiFoundryHubName --resource-group $resourceGroupName --query id -o tsv 2>/dev/null || echo "")
+    
+    if [ -n "$aiFoundryResourceId" ]; then
+        # Azure AI Developer role ID: 64702f94-c441-49e6-a78b-ef80e0188fee
+        echo "Assigning 'Azure AI Developer' role..."
+        az role assignment create \
+            --assignee "$currentUserObjectId" \
+            --role "64702f94-c441-49e6-a78b-ef80e0188fee" \
+            --scope "$aiFoundryResourceId" \
+            --only-show-errors 2>/dev/null && echo "✅ Azure AI Developer role assigned successfully" || echo "⚠️  Role may already exist or assignment failed (this is usually OK)"
+        
+        # Also assign Cognitive Services User role for additional access
+        echo "Assigning 'Cognitive Services User' role..."
+        az role assignment create \
+            --assignee "$currentUserObjectId" \
+            --role "a97b65f3-24c7-4388-baec-2e87135dc908" \
+            --scope "$aiFoundryResourceId" \
+            --only-show-errors 2>/dev/null && echo "✅ Cognitive Services User role assigned successfully" || echo "⚠️  Role may already exist or assignment failed (this is usually OK)"
+    else
+        echo "⚠️  Could not find AI Foundry Hub resource. Role assignment skipped."
+    fi
+else
+    if [ -z "$currentUserObjectId" ]; then
+        echo "⚠️  Could not determine current user's Object ID. Role assignment skipped."
+        echo "   You may need to manually assign 'Azure AI Developer' role to access AI Foundry agents."
+    fi
+    if [ -z "$aiFoundryHubName" ]; then
+        echo "⚠️  AI Foundry Hub not found. Role assignment skipped."
+    fi
+fi
+echo ""
 
 if [ -z "$storageAccountName" ] || [ -z "$aiFoundryProjectName" ]; then
     if [ -z "$storageAccountName" ]; then

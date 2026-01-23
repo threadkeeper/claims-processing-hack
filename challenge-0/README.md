@@ -65,7 +65,10 @@ cd challenge-0 && ./get-keys.sh --resource-group YOUR_RESOURCE_GROUP_NAME
 
 Replace `YOUR_RESOURCE_GROUP_NAME` with the actual name of the resource group created.
 
-This script will connect to Azure and fetch the necessary keys and populate the `.env` file with the required values in the root directory of the repository.
+This script will:
+1. Connect to Azure and fetch the necessary keys
+2. **Assign Azure AI Developer and Cognitive Services User roles** to your user account (required for AI Foundry agent management)
+3. Populate the `.env` file with the required values in the root directory of the repository
 
 ## 1.6 Verify `.env` setup
 
