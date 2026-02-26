@@ -28,12 +28,17 @@ if [ -z "$resourceGroupName" ]; then
     read resourceGroupName
 fi
 
-# Get resource group deployments, find deployments starting with 'Microsoft.Template' and sort them by timestamp
+# Get resource group deployments, find the most recent successful one
 echo "Getting the deployments in '$resourceGroupName'..."
-deploymentName=$(az deployment group list --resource-group $resourceGroupName --query "[?contains(name, 'Microsoft.Template') || contains(name, 'azuredeploy')].{name:name}[0].name" --output tsv)
-if [ $? -ne 0 ]; then
-    echo "Error occurred while fetching deployments. Exiting..."
-    exit 1
+deploymentName=$(az deployment group list --resource-group $resourceGroupName --query "sort_by([?properties.provisioningState=='Succeeded'], &properties.timestamp) | [-1].name" --output tsv 2>/dev/null)
+if [ $? -ne 0 ] || [ -z "$deploymentName" ]; then
+    echo "No successful deployments found. Trying to find the most recent deployment regardless of state..."
+    deploymentName=$(az deployment group list --resource-group $resourceGroupName --query "sort_by([], &properties.timestamp) | [-1].name" --output tsv 2>/dev/null)
+    if [ $? -ne 0 ] || [ -z "$deploymentName" ]; then
+        echo "Error: No deployments found in '$resourceGroupName'. Exiting..."
+        exit 1
+    fi
+    echo "Warning: Using deployment '$deploymentName' which may not have succeeded."
 fi
 
 # Get output parameters from last deployment using Azure CLI queries instead of jq
