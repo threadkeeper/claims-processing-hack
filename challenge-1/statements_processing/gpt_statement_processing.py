@@ -17,27 +17,27 @@ STATEMENTS_OUTPUT_LOCATION = '../output/gpt/'
 AZURE_OPENAI_ENDPOINT = os.getenv('AZURE_OPENAI_ENDPOINT')
 AZURE_OPENAI_KEY = os.getenv('AZURE_OPENAI_KEY')
 AZURE_OPENAI_DEPLOYMENT_NAME = os.getenv('AZURE_OPENAI_DEPLOYMENT_NAME')
-AZURE_OPENAI_API_VERSION = os.getenv('AZURE_OPENAI_API_VERSION')
 
-# Initialize Azure OpenAI Client
+# Initialize Azure OpenAI Client using the Responses API (requires 2025-03-01-preview+)
 openai_client = AzureOpenAI(
     azure_endpoint=AZURE_OPENAI_ENDPOINT,
     api_key=AZURE_OPENAI_KEY,
-    api_version=AZURE_OPENAI_API_VERSION
+    api_version="2025-03-01-preview"
 )
 
 print(f"✅ Configuration loaded:")
-print(f"   OpenAI API Version: {AZURE_OPENAI_API_VERSION}")
+print(f"   OpenAI Endpoint: {AZURE_OPENAI_ENDPOINT}")
 print(f"   OpenAI Deployment: {AZURE_OPENAI_DEPLOYMENT_NAME}")
+print(f"   Using: Responses API")
 
 # Function to encode image to base64
 def encode_image(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode('utf-8')
 
-# Function to perform OCR using GPT-4.1-mini model
+# Function to perform OCR using GPT-4.1-mini Responses API
 def ocr_using_gpt4(front_image_path, back_image_path):
-    """Process front and back images using GPT-4.1-mini"""
+    """Process front and back images using GPT-4.1-mini Responses API"""
     front_base64 = encode_image(front_image_path)
     back_base64 = encode_image(back_image_path)
     
@@ -52,32 +52,28 @@ def ocr_using_gpt4(front_image_path, back_image_path):
     
     Combine information from both front and back images into a single comprehensive JSON object."""
     
-    response = openai_client.chat.completions.create(
+    response = openai_client.responses.create(
         model=AZURE_OPENAI_DEPLOYMENT_NAME,
-        messages=[
+        input=[
             {
                 "role": "user",
                 "content": [
-                    {"type": "text", "text": prompt},
+                    {"type": "input_text", "text": prompt},
                     {
-                        "type": "image_url",
-                        "image_url": {
-                            "url": f"data:image/jpeg;base64,{front_base64}"
-                        }
+                        "type": "input_image",
+                        "image_url": f"data:image/jpeg;base64,{front_base64}"
                     },
                     {
-                        "type": "image_url",
-                        "image_url": {
-                            "url": f"data:image/jpeg;base64,{back_base64}"
-                        }
+                        "type": "input_image",
+                        "image_url": f"data:image/jpeg;base64,{back_base64}"
                     }
                 ]
             }
         ],
-        max_tokens=2000
+        max_output_tokens=2000
     )
     
-    return response.choices[0].message.content
+    return response.output_text
 
 # Function to group claims by number
 def group_claims_by_number(file_list):
